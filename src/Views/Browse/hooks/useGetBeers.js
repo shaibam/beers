@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import getAllBeers from '../../../APIs/getAllBeers';
 
-export default function useGetBeers(pageIndex = 1) {    
+export default function useGetBeers(pageIndex = 1, searchText = '') {
     const [beers, setBeers] = useState(null);
     const isAliveRef = useRef(true)
 
     const fetchBeers = () => {
-        getAllBeers(pageIndex)
+        getAllBeers(pageIndex, searchText)
             .then((d) => {
                 if (!isAliveRef.current) return;
                 setBeers(d);
@@ -24,7 +24,7 @@ export default function useGetBeers(pageIndex = 1) {
             console.log('unmount')
         }
         // eslint-disable-next-line 
-    }, [pageIndex])
+    }, [pageIndex, searchText])
 
     return beers
 }

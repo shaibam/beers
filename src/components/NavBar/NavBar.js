@@ -25,7 +25,7 @@ const AppBar = styled(MuiAppBar, {
     }),
 }));
 
-export default function NavBar({ open = false, onDrawerIsOpen }) {
+export default function NavBar({ open = false, onDrawerIsOpen, breadcrumb = '' }) {
     const [_open, setOpen] = React.useState(false);
 
     useEffect(() => {
@@ -53,7 +53,7 @@ export default function NavBar({ open = false, onDrawerIsOpen }) {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" noWrap component="div">
-                    Some beer brewing
+                    {`Some beer brewing company - ${breadcrumb}`}
                 </Typography>
             </Toolbar>
         </AppBar>

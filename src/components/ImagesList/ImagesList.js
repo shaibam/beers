@@ -14,15 +14,15 @@ export default function ImagesList({ images = [], onImageClick }) {
     <ImageList
       cols={5}
     >
-      {images.map((item) => (
+      {images.map((item, i) => (
         <ImageListItem
-          key={item.image_url}
+          key={item.id}
           sx={{
             '& .MuiImageListItem-img': {
               width: '300px',
               height: '600px',
               objectFit: 'contain',
-              flexGrow: 'unset'          
+              flexGrow: 'unset'
             }
           }}
         >

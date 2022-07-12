@@ -58,18 +58,32 @@ export default function Main() {
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <NavBar open={open} onDrawerIsOpen={handleIsDrawerOpen} />
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/browse" element={<NavBar
+                        open={open}
+                        onDrawerIsOpen={handleIsDrawerOpen}
+                        breadcrumb={'Browse'}
+                    />
+                    } />
+                    <Route path="/favorites" element={<NavBar
+                        open={open}
+                        onDrawerIsOpen={handleIsDrawerOpen}
+                        breadcrumb={'Favorites'}
+                    />
+                    } />
+                </Routes>
+            </BrowserRouter>
             <Menu open={open} onDrawerClose={handleDrawerClose}></Menu>
             <Content open={open}>
                 <DrawerHeader />
-
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/browse" element={<Browse />}/>
-                        <Route path="/favorites" element={<Favorites />}/>
-                        <Route path="*" element={<Navigate to="/browse" replace />}/>
+                        <Route path="/browse" element={<Browse />} />
+                        <Route path="/favorites" element={<Favorites />} />
+                        <Route path="*" element={<Navigate to="/browse" replace />} />
                     </Routes>
-                </BrowserRouter>              
+                </BrowserRouter>
             </Content>
         </Box>
     );
