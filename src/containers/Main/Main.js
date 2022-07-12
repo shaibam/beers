@@ -65,7 +65,13 @@ export default function Main() {
                         onDrawerIsOpen={handleIsDrawerOpen}
                         breadcrumb={'Browse'}
                     />
-                    } />
+                    } >
+                        <Route path=":pageIndex" element={<NavBar
+                            open={open}
+                            onDrawerIsOpen={handleIsDrawerOpen}
+                            breadcrumb={'Browse'}
+                        />} />
+                    </Route>
                     <Route path="/favorites" element={<NavBar
                         open={open}
                         onDrawerIsOpen={handleIsDrawerOpen}
@@ -79,9 +85,12 @@ export default function Main() {
                 <DrawerHeader />
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/browse" element={<Browse />} />
+                        <Route path="/browse" element={<Browse />}>
+                            <Route path=":pageIndex" element={<Browse />} />
+                        </Route>
+                        {/* element={<Browse />} /> */}
                         <Route path="/favorites" element={<Favorites />} />
-                        <Route path="*" element={<Navigate to="/browse" replace />} />
+                        <Route path="*" element={<Navigate to="/browse/1" replace />} />
                     </Routes>
                 </BrowserRouter>
             </Content>

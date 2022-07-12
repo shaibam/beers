@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 export default function BottomPagingNav({ pageIndex = 1, pages }) {
     const [value, setValue] = React.useState(1);
 
-    console.log({ pages });
     if (!pages) return null;
     return (
         <>
@@ -27,8 +26,12 @@ export default function BottomPagingNav({ pageIndex = 1, pages }) {
                     }}
                 >
                     {_.map([...new Array(pages)], (page, index) => {
-                        return (<BottomNavigationAction key={'page' + (index + 1)} label={index + 1} component={Link}
-                            to={`./${index + 1}`} />)
+                        return (<BottomNavigationAction
+                            key={'page' + (index + 1)}
+                            label={index + 1}
+                            component={Link}
+                            to={`./${index + 1}`}
+                        />)
                     })}
                 </BottomNavigation>
             </Box>
