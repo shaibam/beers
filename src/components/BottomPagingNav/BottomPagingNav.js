@@ -15,7 +15,7 @@ export default function BottomPagingNav({ pageIndex = 1, pages }) {
                 bottom: 0,
                 left: 0,
                 boxShadow: '0px 0px 5px 1px lightgrey',
-                position: 'absolute'
+                position: 'fixed'
             }}>
                 <BottomNavigation
                     showLabels
