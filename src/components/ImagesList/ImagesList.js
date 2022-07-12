@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useMemo } from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
@@ -6,8 +6,19 @@ import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import { useWindowSize } from 'rooks';
 
-export default function ImagesList({ images = [], onImageClick, onAddToFavorites, onRemoveFromFavorites }) {  
+const IMAGE_WIDTH = 300;
+const IMAGE_HEIGHT = 600;
+
+export default function ImagesList({ images = [], onImageClick, onAddToFavorites, onRemoveFromFavorites }) {
+
+  const { innerWidth } = useWindowSize();
+
+  const columnsMemo = useMemo(() => {
+    return Math.floor(innerWidth / IMAGE_WIDTH);
+  }, [innerWidth]);
+
   const handleImageClick = (image) => {
     if (onImageClick) onImageClick(image)
   }
@@ -16,21 +27,23 @@ export default function ImagesList({ images = [], onImageClick, onAddToFavorites
     if (onAddToFavorites) onAddToFavorites(image)
   }
 
-  const handleRemoveFromFavorites = (image) => {  
+  const handleRemoveFromFavorites = (image) => {
     if (onRemoveFromFavorites) onRemoveFromFavorites(image)
   }
 
+  console.log({ columnsMemo });
+
   return (
     <ImageList
-      cols={5}
+      cols={columnsMemo}
     >
       {images.map((item, i) => (
         <ImageListItem
           key={item.id}
           sx={{
             '& .MuiImageListItem-img': {
-              width: '300px',
-              height: '600px',
+              width: IMAGE_WIDTH,
+              height: IMAGE_HEIGHT,
               objectFit: 'contain',
               flexGrow: 'unset'
             }
