@@ -9,9 +9,10 @@ import {
     BrowserRouter,
     Routes,
     Route,
+    Navigate
 } from "react-router-dom";
-import Favorites from '../../Views/Favorites/Favorites';
-import Browse from '../../Views/Browse/Browse';
+import Favorites from '../../views/Favorites/Favorites';
+import Browse from '../../views/Browse/Browse';
 
 const DRAWER_WIDTH = 240;
 
@@ -66,7 +67,7 @@ export default function Main() {
                     <Routes>
                         <Route path="/browse" element={<Browse />}/>
                         <Route path="/favorites" element={<Favorites />}/>
-                        <Route path="/" element={<Browse />}/>
+                        <Route path="*" element={<Navigate to="/browse" replace />}/>
                     </Routes>
                 </BrowserRouter>              
             </Content>

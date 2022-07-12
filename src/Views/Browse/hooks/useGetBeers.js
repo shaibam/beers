@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import getAllBeers from '../../../APIs/getAllBeers';
 
 export default function useGetBeers() {
@@ -17,11 +17,13 @@ export default function useGetBeers() {
     }
 
     useEffect(() => {
-        fetchBeers()
+        isAliveRef.current = true;
+        fetchBeers();
         return () => {
             isAliveRef.current = false;
+            console.log('unmount')
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+
     }, [])
 
     return beers
