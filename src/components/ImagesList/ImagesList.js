@@ -16,7 +16,7 @@ export default function ImagesList({ images = [], onImageClick, onAddToFavorites
     if (onAddToFavorites) onAddToFavorites(image)
   }
 
-  const handleRemoveFromFavorites = (image) => {
+  const handleRemoveFromFavorites = (image) => {  
     if (onRemoveFromFavorites) onRemoveFromFavorites(image)
   }
 

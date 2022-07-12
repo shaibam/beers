@@ -3,8 +3,11 @@ import useGetBeers from './hooks/useGetBeers'
 import Alert from '@mui/material/Alert';
 import ImagesList from '../../components/ImagesList/ImagesList';
 import ImageDetailsDialog from '../../components/ImageDetailsDialog/ImageDetailsDialog';
+import { remove } from '../../redux/feature/favorites/favoritesSlice';
+import { useDispatch } from 'react-redux';
 
 export default function Favorites() {
+  const dispatch = useDispatch();
   const [selected, setSelected] = useState();
   const beers = useGetBeers();
 
@@ -16,7 +19,11 @@ export default function Favorites() {
     setSelected(null)
   }
 
-  if (!beers)
+  const handleRemoveFromFavorite = (item) => {    
+    dispatch(remove({ id: item.id }))
+  }
+
+  if (!beers?.length)
     return <Alert variant="outlined" severity="info">
       Come-on... there must be something you like!
     </Alert>
@@ -29,7 +36,8 @@ export default function Favorites() {
       /> : null}
       <ImagesList
         images={beers}
-        onImageClick={handleImageClick} />
+        onImageClick={handleImageClick}
+        onRemoveFromFavorites={handleRemoveFromFavorite} />
     </>
   )
 }

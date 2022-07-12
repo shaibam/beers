@@ -11,12 +11,12 @@ const getFavorites = (state) => {
 
 export const getAllBeers = createSelector(
     [getBeersPages, getFavorites],
-    (beersPages, favoritesIds) => {        
+    (beersPages, favoritesIds) => {
         const b = _.map(beersPages, (beers) => {
-            return _.map(beers, (beer) => {                
-                return { ...beer, favorite: _.indexOf(favoritesIds, beer.id)!==-1 ? true : false }
+            return _.map(beers, (beer) => {
+                return { ...beer, favorite: _.indexOf(favoritesIds, beer.id) !== -1 ? true : false }
             })
-        })        
+        })
         return b;
     }
 )
@@ -27,6 +27,10 @@ export const getAllFavorites = createSelector(
         const flat = _.flatten(beersPages);
         const keyed = _.keyBy(flat, 'id');
         const b = _.map(favoritesIds, id => keyed[id])
-        return b;
+        const mb = _.map(b, (beer) => ({
+            ...beer,
+            favorite: true
+        }))
+        return mb;
     }
 )
