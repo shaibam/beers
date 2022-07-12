@@ -8,12 +8,14 @@ import style from './style/style.module.css';
 import usePageIndex from './hooks/usePageIndex';
 import BottomPagingNav from '../../components/BottomPagingNav/BottomPagingNav';
 import { PER_PAGE } from '../../APIs/getAllBeers';
+import { useNavigate } from "react-router-dom";
 
 export default function Browse() {
   const [selected, setSelected] = useState();
   const [searchText, setSearchText] = useState();
-  const pageIndex = usePageIndex();
+  const pageIndex = usePageIndex(searchText);
   const beers = useGetBeers(pageIndex, searchText);
+  const navigate = useNavigate();  
 
   const handleImageClick = (image) => {
     setSelected(image)
@@ -24,7 +26,8 @@ export default function Browse() {
   }
 
   const handleSearchSubmit = (text) => {
-    setSearchText(text)
+    setSearchText(text);
+    navigate(`/browse/1${text ? '/' + text : ''}`);
   }
 
   if (!beers)
@@ -46,7 +49,10 @@ export default function Browse() {
       <ImagesList
         images={beers}
         onImageClick={handleImageClick} />
-      <BottomPagingNav pageIndex={pageIndex} pages={Math.ceil(100 / PER_PAGE)} />
+      {!searchText ?
+        <BottomPagingNav pageIndex={pageIndex} pages={Math.ceil(100 / PER_PAGE)} />
+        : null
+      }
     </>
   )
 }

@@ -70,7 +70,13 @@ export default function Main() {
                             open={open}
                             onDrawerIsOpen={handleIsDrawerOpen}
                             breadcrumb={'Browse'}
-                        />} />
+                        />}>
+                            <Route path=":search" element={<NavBar
+                                open={open}
+                                onDrawerIsOpen={handleIsDrawerOpen}
+                                breadcrumb={'Browse'}
+                            />}></Route>
+                        </Route>
                     </Route>
                     <Route path="/favorites" element={<NavBar
                         open={open}
@@ -86,11 +92,13 @@ export default function Main() {
                 <BrowserRouter>
                     <Routes>
                         <Route path="/browse" element={<Browse />}>
-                            <Route path=":pageIndex" element={<Browse />} />
+                            <Route path=":pageIndex" element={<Browse />}>
+                                <Route path=":search" element={<Browse />} />
+                            </Route>
                         </Route>
                         {/* element={<Browse />} /> */}
                         <Route path="/favorites" element={<Favorites />} />
-                        <Route path="*" element={<Navigate to="/browse/1" replace />} />
+                        {/* <Route path="*" element={<Navigate to="/browse/1" replace />} /> */}
                     </Routes>
                 </BrowserRouter>
             </Content>

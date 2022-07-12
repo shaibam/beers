@@ -1,10 +1,13 @@
-import { useState } from "react";
-// import { useLocation } from "react-router-dom";
+import { useMemo } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function usePageIndex() {
-    const [pageIndex, setPageIndex] = useState(1);
-    // const l = useLocation();
-    // console.log({ l });
+    const l = useLocation();
 
-    return pageIndex;
+    const pageIndexMemo = useMemo(() => {
+        const p = l.pathname.split('/');            
+        return parseInt(p[2]) || 1;
+    }, [l.pathname])
+
+    return pageIndexMemo;
 }

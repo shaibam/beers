@@ -5,8 +5,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
 
-export default function BottomPagingNav({ pageIndex = 1, pages }) {
-    const [value, setValue] = React.useState(1);
+export default function BottomPagingNav({ pageIndex = 1, pages }) {    
 
     if (!pages) return null;
     return (
@@ -20,10 +19,7 @@ export default function BottomPagingNav({ pageIndex = 1, pages }) {
             }}>
                 <BottomNavigation
                     showLabels
-                    value={value}
-                    onChange={(event, newValue) => {
-                        setValue(newValue);
-                    }}
+                    value={pageIndex-1}
                 >
                     {_.map([...new Array(pages)], (page, index) => {
                         return (<BottomNavigationAction
