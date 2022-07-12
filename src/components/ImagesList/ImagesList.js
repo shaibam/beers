@@ -5,8 +5,11 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 
+export default function ImagesList({ images = [], onImageClick }) {
+  const handleImageClick = (image) => {
+    if (onImageClick) onImageClick(image)
+  }
 
-export default function ImagesList({ images = [] }) {
   return (
     <ImageList
       cols={5}
@@ -19,14 +22,15 @@ export default function ImagesList({ images = [] }) {
               width: '300px',
               height: '600px',
               objectFit: 'contain',
-              flexGrow: 'unset',
+              flexGrow: 'unset'          
             }
-          }}        
+          }}
         >
           <img
-            src={item.image_url}            
+            src={item.image_url}
             alt={item.name}
             loading="lazy"
+
           />
           <ImageListItemBar
             title={item.tagline}
@@ -36,7 +40,7 @@ export default function ImagesList({ images = [] }) {
                 sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                 aria-label={`info about ${item.tagline}`}
               >
-                <InfoIcon />
+                <InfoIcon onClick={() => { handleImageClick(item) }} />
               </IconButton>
             }
           />
