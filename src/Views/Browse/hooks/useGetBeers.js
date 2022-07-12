@@ -13,13 +13,14 @@ export default function useGetBeers(pageIndex = 1, searchText = '') {
 
     const fetchBeers = () => {
         const beersGlobalState = getAllBeersSelector(store.getState());
-        console.log({ beersGlobalState });
-        if (!beersGlobalState?.[pageIndex])
+        debugger;
+        if (!beersGlobalState?.[pageIndex]?.length || searchText)
             getAllBeers(pageIndex, searchText)
                 .then((data) => {
                     if (!isAliveRef.current) return;
                     setBeers(data);
-                    dispatch(addPage({ pageIndex, data }));
+                    if (!searchText)
+                        dispatch(addPage({ pageIndex, data }));
                 })
                 .catch(() => {
                     fetchBeers(); //Error handling - retry

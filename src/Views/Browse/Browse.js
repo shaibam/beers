@@ -41,7 +41,7 @@ export default function Browse() {
     dispatch(remove({ id: item.id }));
   }
 
-  if (!beers)
+  if (!beers?.length)
     return <Alert variant="outlined" severity="info">
       Fetching some beers for you, please hold your horses....
     </Alert>
