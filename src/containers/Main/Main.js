@@ -2,13 +2,13 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-// import Typography from '@mui/material/Typograxphy';
 import NavBar from '../../components/NavBar/NavBar';
 import Menu from '../../components/Menu/Menu';
 import {
     BrowserRouter,
     Routes,
-    Route
+    Route,
+    Navigate
 } from "react-router-dom";
 import Favorites from '../../views/Favorites/Favorites';
 import Browse from '../../views/Browse/Browse';
@@ -55,9 +55,9 @@ export default function Main() {
     };
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <BrowserRouter>
+        <BrowserRouter>
+            <Box sx={{ display: 'flex' }}>
+                <CssBaseline />
                 <Routes>
                     <Route path="/browse" element={<NavBar
                         open={open}
@@ -84,23 +84,22 @@ export default function Main() {
                     />
                     } />
                 </Routes>
-            </BrowserRouter>
-            <Menu open={open} onDrawerClose={handleDrawerClose}></Menu>
-            <Content open={open}>
-                <DrawerHeader />
-                <BrowserRouter>
+
+                <Menu open={open} onDrawerClose={handleDrawerClose}></Menu>
+
+                <Content open={open}>
+                    <DrawerHeader />
                     <Routes>
                         <Route path="/browse" element={<Browse />}>
                             <Route path=":pageIndex" element={<Browse />}>
                                 <Route path=":search" element={<Browse />} />
                             </Route>
                         </Route>
-                        {/* element={<Browse />} /> */}
                         <Route path="/favorites" element={<Favorites />} />
-                        {/* <Route path="*" element={<Navigate to="/browse/1" replace />} /> */}
+                        <Route path="/" element={<Navigate to="/browse/1" replace />} />
                     </Routes>
-                </BrowserRouter>
-            </Content>
-        </Box>
+                </Content>
+            </Box>
+        </BrowserRouter>
     );
 }

@@ -12,6 +12,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import SportsBarIcon from '@mui/icons-material/SportsBar';
 import StarIcon from '@mui/icons-material/Star';
+import { Link } from 'react-router-dom';
 
 const DRAWER_WIDTH = 240;
 
@@ -61,7 +62,10 @@ export default function Menu({ open = false, onDrawerClose }) {
             </DrawerHeader>
             <Divider />
             <List>
-                <ListItem disablePadding>
+                <ListItem disablePadding
+                    component={Link}
+                    to={'/browse/1'}
+                >
                     <ListItemButton>
                         <ListItemIcon>
                             <SportsBarIcon />
@@ -69,7 +73,10 @@ export default function Menu({ open = false, onDrawerClose }) {
                         <ListItemText primary={'Browse'} />
                     </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding>
+                <ListItem disablePadding
+                    component={Link}
+                    to={'/favorites'}
+                >
                     <ListItemButton>
                         <ListItemIcon>
                             <StarIcon />

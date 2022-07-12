@@ -1,17 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import getAllBeers from '../../../APIs/getAllBeers';
+import { getAllBeers as getAllBeersSelector } from '../../../redux/selectors';
 import { addPage } from '../../../redux/feature/beers/slice/beersSlice';
-import store from '../../../redux/store';
+import store from '../../../redux/store'
 
 export default function useGetBeers(pageIndex = 1, searchText = '') {
+    const favoriteIds = useSelector(state => state.favorites);
     const dispatch = useDispatch();
     const [beers, setBeers] = useState(null);
     const isAliveRef = useRef(true)
 
     const fetchBeers = () => {
-        const beersGlobalState = store.getState().beers.value;
-        console.log({ beersGlobalState })
+        const beersGlobalState = getAllBeersSelector(store.getState());
+        console.log({ beersGlobalState });
         if (!beersGlobalState?.[pageIndex])
             getAllBeers(pageIndex, searchText)
                 .then((data) => {
@@ -34,7 +36,7 @@ export default function useGetBeers(pageIndex = 1, searchText = '') {
             isAliveRef.current = false;
         }
         // eslint-disable-next-line 
-    }, [pageIndex, searchText])
+    }, [pageIndex, searchText, favoriteIds])
 
     return beers
 }

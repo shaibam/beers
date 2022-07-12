@@ -8,8 +8,7 @@ export const beersSlice = createSlice({
     reducers: {
         addPage: (state, { payload }) => {            
             const s = [...(state.value || [])];
-            s[payload.pageIndex] = payload.data;
-            console.log({ s })
+            s[payload.pageIndex] = payload.data;            
             state.value = s;            
         }
     },

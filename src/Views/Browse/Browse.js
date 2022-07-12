@@ -9,9 +9,11 @@ import usePageIndex from './hooks/usePageIndex';
 import BottomPagingNav from '../../components/BottomPagingNav/BottomPagingNav';
 import { PER_PAGE } from '../../APIs/getAllBeers';
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { add, remove } from '../../redux/feature/favorites/favoritesSlice';
 
 export default function Browse() {
-  
+  const dispatch = useDispatch();
   const [selected, setSelected] = useState();
   const [searchText, setSearchText] = useState();
   const pageIndex = usePageIndex(searchText);
@@ -29,6 +31,14 @@ export default function Browse() {
   const handleSearchSubmit = (text) => {
     setSearchText(text);
     navigate(`/browse/1${text ? '/' + text : ''}`);
+  }
+
+  const handleAddToFavorites = (item) => {
+    dispatch(add({ id: item.id }));
+  }
+
+  const handleRemoveFromFavorites = (item) => {
+    dispatch(remove({ id: item.id }));
   }
 
   if (!beers)
@@ -49,7 +59,10 @@ export default function Browse() {
       </div>
       <ImagesList
         images={beers}
-        onImageClick={handleImageClick} />
+        onImageClick={handleImageClick}
+        onAddToFavorites={handleAddToFavorites}
+        onRemoveFromFavorites={handleRemoveFromFavorites}
+      />
       {!searchText ?
         <BottomPagingNav pageIndex={pageIndex} pages={Math.ceil(100 / PER_PAGE)} />
         : null

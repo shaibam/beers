@@ -4,10 +4,20 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
+import StarIcon from '@mui/icons-material/Star';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
-export default function ImagesList({ images = [], onImageClick }) {
+export default function ImagesList({ images = [], onImageClick, onAddToFavorites, onRemoveFromFavorites }) {  
   const handleImageClick = (image) => {
     if (onImageClick) onImageClick(image)
+  }
+
+  const handleAddToFavorites = (image) => {
+    if (onAddToFavorites) onAddToFavorites(image)
+  }
+
+  const handleRemoveFromFavorites = (image) => {
+    if (onRemoveFromFavorites) onRemoveFromFavorites(image)
   }
 
   return (
@@ -36,13 +46,32 @@ export default function ImagesList({ images = [], onImageClick }) {
             title={item.tagline}
             subtitle={`First brewed ${item.first_brewed}`}
             actionIcon={
-              <IconButton
-                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                aria-label={`info about ${item.tagline}`}
-                onClick={() => { handleImageClick(item) }} 
-              >
-                <InfoIcon />
-              </IconButton>
+              <>
+                <IconButton
+                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                  aria-label={`info about ${item.tagline}`}
+                  onClick={() => { handleImageClick(item) }}
+                >
+                  <InfoIcon />
+                </IconButton>
+                {!item?.favorite ?
+                  <IconButton
+                    sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                    aria-label={`info about ${item.tagline}`}
+                    onClick={() => { handleAddToFavorites(item) }}
+                  >
+                    <StarOutlineIcon />
+                  </IconButton> :
+
+                  <IconButton
+                    sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                    aria-label={`info about ${item.tagline}`}
+                    onClick={() => { handleRemoveFromFavorites(item) }}
+                  >
+                    <StarIcon />
+                  </IconButton>
+                }
+              </>
             }
           />
         </ImageListItem>

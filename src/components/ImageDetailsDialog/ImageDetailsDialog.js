@@ -20,8 +20,8 @@ export default function ImageDetailsDialog({ image = {}, onClose = () => { } }) 
         <Dialog onClose={onClose} open={true}>
             <DialogTitle>{image.name}</DialogTitle>
             <List sx={{ pt: 0 }}>
-                {listMemo.map((item) => (
-                    <ListItem key={item}>
+                {listMemo.map((item, i) => (
+                    <ListItem key={'item' + i}>
                         <ListItemText primary={item} />
                     </ListItem>
                 ))}
