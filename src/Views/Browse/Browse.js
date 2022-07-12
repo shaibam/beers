@@ -11,11 +11,12 @@ import { PER_PAGE } from '../../APIs/getAllBeers';
 import { useNavigate } from "react-router-dom";
 
 export default function Browse() {
+  
   const [selected, setSelected] = useState();
   const [searchText, setSearchText] = useState();
   const pageIndex = usePageIndex(searchText);
   const beers = useGetBeers(pageIndex, searchText);
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   const handleImageClick = (image) => {
     setSelected(image)

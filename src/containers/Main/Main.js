@@ -8,8 +8,7 @@ import Menu from '../../components/Menu/Menu';
 import {
     BrowserRouter,
     Routes,
-    Route,
-    Navigate
+    Route
 } from "react-router-dom";
 import Favorites from '../../views/Favorites/Favorites';
 import Browse from '../../views/Browse/Browse';

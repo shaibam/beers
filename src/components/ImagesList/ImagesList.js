@@ -39,8 +39,9 @@ export default function ImagesList({ images = [], onImageClick }) {
               <IconButton
                 sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                 aria-label={`info about ${item.tagline}`}
+                onClick={() => { handleImageClick(item) }} 
               >
-                <InfoIcon onClick={() => { handleImageClick(item) }} />
+                <InfoIcon />
               </IconButton>
             }
           />
