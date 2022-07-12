@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import useGetBeers from './hooks/useGetBeers'
 import Alert from '@mui/material/Alert';
+import ImagesList from '../../components/ImagesList/ImagesList';
 
 export default function Browse() {
   const beers = useGetBeers();
@@ -11,6 +12,6 @@ export default function Browse() {
     </Alert>
 
   return (
-    <div>Browse</div>
+    <ImagesList images={beers} />
   )
 }
