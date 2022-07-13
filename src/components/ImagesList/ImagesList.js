@@ -31,8 +31,6 @@ export default function ImagesList({ images = [], onImageClick, onAddToFavorites
     if (onRemoveFromFavorites) onRemoveFromFavorites(image)
   }
 
-  console.log({ columnsMemo });
-
   return (
     <ImageList
       cols={columnsMemo}
